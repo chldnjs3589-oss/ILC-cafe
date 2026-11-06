@@ -1,0 +1,9 @@
+{
+  "name": "moonlight-cafe",
+  "version": "1.0.0",
+  "private": true,
+  "description": "친구들이 링크로 만나는 실시간 2D 가상 카페",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=20" },
+  "license": "MIT"
+}

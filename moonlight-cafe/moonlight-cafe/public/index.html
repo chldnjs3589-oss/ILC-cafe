@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#241b28" />
+  <meta name="description" content="우리끼리만 아는 작은 가상 카페. 친구들과 실시간으로 모여 이야기해요." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/styles.css" />
+  <title>달빛다방 | 친구들과 만나는 온라인 카페</title>
+</head>
+<body>
+  <div class="orb orb1" aria-hidden="true"></div><div class="orb orb2" aria-hidden="true"></div>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><div class="brand-icon">☕</div><div><strong>달빛다방</strong><small>MOONLIGHT CAFÉ</small></div></div>
+      <div class="top-right"><div class="room-tag">ROOM <strong id="roomId">------</strong></div><span class="live-tag"><span class="pulse"></span><span id="statusLabel">입장 전</span></span></div>
+    </header>
+    <section class="welcome-section">
+      <div><div class="eyebrow">✦ YOUR LITTLE SPACE ON THE INTERNET</div><h1>우리, 오늘도 <em>여기서</em> 만나.</h1><p>멀리 있어도 같은 테이블에 앉아, 커피 한 잔과 작은 대화를 나눠요.</p></div>
+      <div class="header-actions"><button class="btn btn-secondary" id="soundBtn" type="button">♫ <span>분위기 소리 켜기</span></button><button class="btn btn-primary" id="shareBtn" type="button">↗ 친구 초대하기</button></div>
+    </section>
+    <main class="app-layout">
+      <section class="world-card">
+        <div class="world-top"><div class="world-label"><span class="star">✳</span> CAFÉ FLOOR <span class="divider-dot">·</span> <span id="worldSubtitle">창가의 오후</span></div><div class="online-count">🟢 <b id="onlineCount">0</b>명 함께 있는 중</div></div>
+        <div class="world-viewport" id="worldViewport"><canvas id="worldCanvas" width="1000" height="625" aria-label="가상 카페 공간. 화살표나 WASD로 이동하거나 원하는 위치를 탭하세요."></canvas><div class="viewport-note">드래그 없이 터치로 이동 · <span class="desktop-only">WASD / 방향키</span></div></div>
+        <div class="world-actions">
+          <div class="action-group"><button class="action-pill" id="sitBtn" type="button">🪑 <span>앉기</span></button><button class="action-pill" id="drinkBtn" type="button">☕ <span>음료 주문</span></button><button class="action-pill" data-act="wave" type="button">👋 <span>인사</span></button><button class="action-pill" data-act="heart" type="button">💕 <span>하트</span></button><button class="action-pill" data-act="cheers" type="button">🥂 <span>짠!</span></button></div>
+          <span class="world-tip" id="worldTip">편하게 둘러보세요 ✨</span>
+        </div>
+        <div class="mobile-pad" aria-label="모바일 이동 버튼"><button data-dir="up" aria-label="위로 이동">▲</button><div><button data-dir="left" aria-label="왼쪽으로 이동">◀</button><button data-dir="down" aria-label="아래로 이동">▼</button><button data-dir="right" aria-label="오른쪽으로 이동">▶</button></div></div>
+      </section>
+      <aside class="sidebar">
+        <section class="side-panel chat-panel">
+          <div class="side-title"><div><span class="title-icon">✉</span><strong>카페 대화</strong></div><span class="side-sub">LIVE CHAT</span></div>
+          <div class="chat-list" id="chatList" role="log" aria-live="polite"><div class="welcome-chat"><span>✦</span><b>달빛다방에 오신 걸 환영해요!</b><p>같은 방의 친구들과 실시간으로 대화할 수 있어요.</p></div></div>
+          <form id="chatForm" class="chat-compose"><input id="chatInput" maxlength="180" autocomplete="off" placeholder="친구들에게 이야기하기..." aria-label="채팅 메시지"/><button type="submit" aria-label="메시지 보내기">➤</button></form>
+        </section>
+        <section class="side-panel guests-panel"><div class="side-title"><div><span class="title-icon">♧</span><strong>오늘의 손님</strong></div><span class="side-sub"><span id="guestCount">0</span> GUESTS</span></div><div class="guest-list" id="guestList"><div class="empty-guests">아직 들어온 손님이 없어요.</div></div></section>
+        <div class="quote-card"><span>“</span>좋은 시간은 특별한 장소보다<br/>좋은 사람들과 함께일 때 시작돼요.<small>— 달빛다방 한마디</small></div>
+      </aside>
+    </main>
+    <footer class="footer"><span>☾ Made for late-night conversations.</span><span>회원가입 없이 · 설치 없이 · 함께하는 작은 공간</span></footer>
+  </div>
+  <dialog id="entryDialog" class="entry-dialog">
+    <form method="dialog" id="entryForm">
+      <div class="entry-illustration"><span>☾</span><div class="entry-cup">☕</div><div class="entry-star s1">✦</div><div class="entry-star s2">✦</div></div>
+      <div class="entry-eyebrow">WELCOME TO MOONLIGHT CAFÉ</div>
+      <h2>어서 와요,<br/><em>자리를 준비했어요.</em></h2>
+      <p>친구들과 만날 카페에 입장해 주세요.</p>
+      <label for="nameInput">어떻게 불러드릴까요?</label><input id="nameInput" name="name" maxlength="14" required placeholder="닉네임 입력" autocomplete="nickname" />
+      <label for="roomInput">방 코드 <small>(친구에게 받은 코드가 있다면 입력)</small></label><input id="roomInput" name="room" maxlength="10" pattern="[A-Za-z0-9]{4,10}" placeholder="자동으로 새 방 생성" autocapitalize="characters" />
+      <button type="submit" id="enterBtn">카페 입장하기 <span>→</span></button>
+      <div class="entry-foot">☕ 방 코드를 비워두면 새로운 카페가 열려요.</div>
+    </form>
+  </dialog>
+  <dialog id="drinkDialog" class="menu-dialog"><div class="menu-heading"><div><span>☕ TODAY'S MENU</span><h2>어떤 걸 드릴까요?</h2></div><button id="closeMenu" type="button" aria-label="메뉴 닫기">×</button></div><div class="menu-items"><button data-drink="coffee" type="button"><span>☕</span><b>아메리카노</b><small>깊고 부드러운 한 잔</small></button><button data-drink="latte" type="button"><span>🥛</span><b>카페라떼</b><small>포근한 우유 거품</small></button><button data-drink="tea" type="button"><span>🍵</span><b>따뜻한 차</b><small>느긋한 오후의 향기</small></button><button data-drink="choco" type="button"><span>🍫</span><b>핫초코</b><small>달콤한 기분 전환</small></button></div><small class="menu-caption">가상 음료예요. 결제는 없어요 :)</small></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

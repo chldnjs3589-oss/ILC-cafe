@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: moonlight-friends-cafe
+    runtime: node
+    plan: free
+    buildCommand: echo "No dependencies to install"
+    startCommand: npm start
+    healthCheckPath: /health
